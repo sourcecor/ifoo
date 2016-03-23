@@ -1,0 +1,44 @@
+<%= simple_form_for @group do |f| %>
+
+  <div class="ui green segment">
+    <div class="ui clearing">
+      <h4 class="ui red huge left floated header"><%= @group.new_record? ? "新增" : "修改" %>群組權限</h4>
+      <div class="ui buttons right floated sticky">
+        <%= link_to "取消", :back, class: "ui button" %>
+        <div class="or"></div>
+        <%= f.button :submit, "保存", :disable_with => "Submiting..."%>
+      </div>
+    </div>
+  	<div class="field">
+  		<label>設定群組名稱</label>
+  		<div class="four fields">
+  		  <%= f.input :caption, placeholder: "群組名稱", :required => true %>
+  		</div>
+  	</div>
+    <div style="clear:both;"></div>
+  	<div class="field">
+      <div class="ui horizontal divider">群組成員</div>
+      <div class="ui grid">
+        <%= hidden_field_tag "admin_group[user_ids][]", nil %>
+        <% for user in Admin::User.all.where(
+          "id not in(select user_id from admin_groups_users)
+            or
+          id in (select user_id from admin_groups_users where group_id='#{@group.id}')") %>
+          <%= render 'user_fields', f: user %>
+        <% end %>
+      </div>
+  	</div>
+    <div class="field">
+    <div class="ui horizontal divider">群組選單</div>
+      <div class="ui grid">
+        <%= hidden_field_tag "admin_group[menu_ids][]", nil %>
+        <% for menu in Admin::Menu.where("(parent_id IS NULL or parent_id =0)") %>
+          <%= render 'menu_fields', f: menu %>
+        <% end %>
+      </div>
+    </div>
+    <div style="clear:both;"></div>
+  </div>
+<% end %>
+
+

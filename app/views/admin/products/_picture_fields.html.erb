@@ -1,0 +1,6 @@
+<div class="nested-fields ui three wide column">
+<i class="move icon" style="margin: 10px 0px; cursor: move;"></i>
+<%= f.input :image, :as => :image_preview, :input_html => {:preview_version => :thumb,  :onchange => "readURL(this);" } %>
+<%= f.hidden_field :seq %> <!-- spec的detail欄位 -->
+<%= link_to_remove_association "移除", f, { data: {confirm: '要刪除嗎?'}, class: 'ui red button', style: "height: 36px" } %>
+</div>

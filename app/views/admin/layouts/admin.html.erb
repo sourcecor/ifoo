@@ -1,0 +1,14 @@
+<%= extends "admin/layouts/base" do %>
+	<%= render "admin/common/sidebar" %>
+	<div class="pusher">
+		<div id="container">
+			<%= render "admin/common/navbar" %>
+			<%= semantic_breadcrumbs %>
+			<div id="content">
+				<%= yield %>
+			</div>
+			<%= render "admin/common/footer" %>
+		</div>
+	</div>
+<% end %>
+

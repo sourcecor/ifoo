@@ -1,0 +1,76 @@
+<script>
+$(document)
+  .ready(function() {
+    $('.ui.form')
+      .form({
+        fields: {
+          email: {
+            identifier  : 'admin_user_email',
+            rules: [
+              {
+                type   : 'empty',
+                prompt : 'Please enter your e-mail'
+              },
+              {
+                type   : 'email',
+                prompt : 'Please enter a valid e-mail'
+              }
+            ]
+          },
+          password: {
+            identifier  : 'admin_user_password',
+            rules: [
+              {
+                type   : 'empty',
+                prompt : 'Please enter your password'
+              },
+              {
+                type   : 'length[8]',
+                prompt : 'Your password must be at least 8 characters'
+              }
+            ]
+          }
+        }
+      })
+    ;
+  })
+;
+</script>
+<style type="text/css">
+    body {
+      background-color: #DADADA;
+    }
+    body > .grid {
+      height: 100%;
+    }
+    .image {
+      margin-top: -100px;
+    }
+    .column {
+      max-width: 450px;
+    }
+</style>
+
+<div class="ui middle aligned center aligned grid">
+  <div class="column left aligned">
+    <h2 class="ui teal image header">
+      <%= image_tag("logo.png", class: "image") %>
+      <div class="content">
+        Log-in to your account
+      </div>
+    </h2>
+    <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    <%= f.error_notification %>
+      <div class="ui stacked segment">
+        <%= f.input :email, wrapper: :input_icon_left, required: true, autofocus: true, placeholder: "E-mail address", icon_html: { class: "user icon" } %>
+        <%= f.input :password, wrapper: :input_icon_left, required: true, placeholder: "Password", icon_html: { class: "lock icon" } %>
+        <%= f.input :remember_me, wrapper: :checkbox, as: :boolean if devise_mapping.rememberable? %>
+        <%= f.button :submit, "Login", class: "ui fluid large teal submit button" %>
+      </div>
+      <div class="ui error message"></div>
+    <% end %>
+    <div class="ui message">
+      <%= render "admin/users/shared/links" %>
+    </div>
+  </div>
+</div>

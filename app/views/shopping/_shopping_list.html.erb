@@ -1,0 +1,52 @@
+<table class="ui celled table">
+  <thead>
+    <tr class="center aligned">
+    <th></th>
+    <th>商品名稱</th>
+    <th>單價</th>
+    <th>數量</th>
+    <th>小計</th>
+    <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% cart.cart_contents.each do |key, value| %>
+    <tr class="center aligned">
+      <td>
+        <img src= <%= value["img"] %> >
+      </td>
+      <td><%= value["caption"] %></td>
+      <td><%= value["sale_price"].to_f.round %></td>
+      <td><%= value["buy_count"] %></td>
+      <td><%= (value["sale_price"].to_f * value["buy_count"].to_i).round  %></td>
+      <td>
+        <%= 
+          link_to "<i class='trash icon'></i>".html_safe, shopping_path(id: value["itemcode"]), 
+            method: :delete, data: { confirm: '確定要移除?' }, class: "ui icon button"
+        %>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+  <tfoot>
+    <tr class="center aligned">
+    <th></th>
+    <th></th>
+    <th>合計</th>
+    <th><%= cart.cart_count %></th>
+    <th><%= cart.subtotal %></th>
+    <th></th>
+    </tr>
+  </tfoot>
+</table>
+<script>
+  $(function(){
+    // 
+    <% if cart.cart_count == 0 %>
+      alert('購物清單中，無任何商品！');
+      window.location = '/'
+    <% end %>
+    // 
+
+  });
+</script>

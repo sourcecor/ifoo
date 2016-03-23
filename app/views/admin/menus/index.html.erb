@@ -1,0 +1,34 @@
+<%= 
+  content_tag(:div, class: "ui inverted top attached menu large") do 
+    concat(content_tag(:div, '選單維護', class: "item header"))
+    concat(content_tag(:a, '新增', class: "active item right button", href: new_admin_menu_path))
+  end
+%>
+<%= grid(@menus_grid) do |g|
+
+  g.blank_slate  do
+    content_tag(:div, "There are no records", class: "ui tertiary segment") 
+  end
+
+  g.column name: '標題', attribute: 'caption', auto_reload: false, filter: false
+
+  g.column name: '動作', attribute: 'action', auto_reload: false, filter: false
+
+  g.column name: '排序', attribute: 'seq', auto_reload: false, filter: false
+  
+  g.column name: '位置(上方or左側)', attribute: 'position', auto_reload: false, filter: false do |menu|
+    menu.position_string
+  end
+
+  g.column name: '可否移除', attribute: 'removable', auto_reload: false, filter: false do |menu|
+    menu.removable_string
+  end
+
+  g.column class: 'center aligned two wide' do |menu|
+    content_tag(:div) do
+      concat(link_to('修改', edit_admin_menu_path(menu), class: 'ui blue mini button'))
+      concat(link_to('移除', menu, method: :delete, data: { confirm: '確定要移除?' }, class: 'ui red mini button'))
+    end
+  end
+
+end -%>

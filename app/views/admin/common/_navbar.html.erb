@@ -1,0 +1,32 @@
+<div class="ui fixed inverted menu">
+	<div id="sidemenu" class="item">
+		<a href="#"><i class="sidebar icon large"></i><span>選單</span></a>
+	</div>
+	<div class="ui container">
+		<%=
+			content_tag(:a, class: "header item", href: admin_dashboard_index_path) do
+				concat(image_tag("logo.png", class: "logo"))
+				concat(content_tag(:span, "Fragrence"))
+			end
+		%>
+		<% menus = current_admin_user.menus.where("(
+			admin_users_menus.parent_id IS NULL
+				or
+			admin_users_menus.parent_id =0)
+				and
+			admin_users_menus.position='top'") %>
+		<% menus.each do |sub| %>
+		<%= g_nav_menu sub %>
+		<% end %>
+	</div>
+	<div class="ui right dropdown item">
+		<i class="user icon"></i>
+		<%= current_admin_user.username %>
+		<i class="dropdown icon"></i>
+		<div class="menu">
+			<div class="item">基本資料</div>
+			<%= link_to('修改密碼', edit_admin_user_registration_path, :class => :item) %>
+			<%= link_to('登出', destroy_admin_user_session_path, :method => :delete, :class => :item) %>
+		</div>
+	</div>
+</div>

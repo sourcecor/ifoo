@@ -1,0 +1,44 @@
+<style type="text/css">
+    body {
+      background-color: #DADADA;
+    }
+    body > .grid {
+      height: 100%;
+    }
+    .image {
+      margin-top: -100px;
+    }
+    .column {
+      max-width: 450px;
+    }
+</style>
+
+<div class="ui middle aligned center aligned grid">
+  <div class="column left aligned">
+    <h2 class="ui teal image header">
+      <%= image_tag("logo.png", class: "image") %>
+      <div class="content">
+        Edit <%= resource_name.to_s.humanize %>
+      </div>
+    </h2>
+    <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }, class: "ui large form") do |f| %>
+      <div class="ui stacked segment">
+        <%= f.input :email, wrapper: :input_icon_left, required: true, autofocus: true, placeholder: "E-mail address", readonly: true,  icon_html: { class: "user icon" } %>
+        <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+          <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
+        <% end %>
+        <%= f.input :password, wrapper: :input_icon_left, autocomplete: "off", hint: "若不修改密碼，請留白", required: false, placeholder: "Password", icon_html: { class: "lock icon" } %>
+        <%= f.input :password_confirmation, wrapper: :input_icon_left, required: false, placeholder: "Repeat Password", icon_html: { class: "lock icon" } %>
+        <%= f.input :current_password, wrapper: :input_icon_left, placeholder: "需要您的密碼做為修改確認!", required: true, icon_html: { class: "checkmark box icon" } %>
+        <%= f.button :submit, "Update", class: "ui fluid large teal submit button" %>
+      </div>
+      <div class="ui error message">
+      </div>
+    <% end %>
+    <div class="ui message">
+      <h3>Cancel my account</h3>
+      <p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
+      <%= link_to "Back", admin_dashboard_index_path %>
+    </div>
+  </div>
+</div>

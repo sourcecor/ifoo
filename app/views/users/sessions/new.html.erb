@@ -1,0 +1,21 @@
+<div class="ui two column middle aligned relaxed vertical segment grid" style="padding-top: 70px">
+  <div class="column">
+  	<h2 class="ui header"> 使用者登入 </h3>
+	<%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+	    <%= f.input :email, label: "帳戶", required: false, autofocus: true, placeholder: "您的email" %>
+	    <%= f.input :password, label: "密碼", required: false %>
+	    <%= f.input :remember_me, wrapper: :checkbox, as: :boolean if devise_mapping.rememberable? %>
+
+	    <%= f.button :submit, "Log in" %>
+	<% end %>
+  </div>
+  <div class="ui vertical divider">Or</div>
+  <div class="center aligned column">
+  <%= content_tag(:a, href: new_user_registration_path, class: "ui big green labeled icon button") do
+      concat(content_tag(:i, "", class: "signup icon"))
+      concat("註冊")
+    end
+  %>
+  </div>
+</div>
+<%# render "devise/shared/links" %>

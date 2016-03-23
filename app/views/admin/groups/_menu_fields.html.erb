@@ -1,0 +1,34 @@
+<% if !f.sub_menus.empty? %>
+  <div class="eight wide column">
+    <h5 class="ui top attached header">
+      <div class="ui checkbox">
+        <%= check_box_tag "admin_group[menu_ids][]", f.id, @group.menus.include?(f) %>
+        <label><h5 class="ui blue header"><i class="bookmark icon"></i><%= f.caption %></h5></label>
+      </div>
+    </h5>
+    <div class="ui attached segment">
+      <% if !f.sub_menus.empty? %>
+        <div class="ui grid">
+          <% f.sub_menus.each do |sub| %>
+            <div class="four wide column">
+              <div class="ui checkbox">
+                <%= check_box_tag "admin_group[menu_ids][]", sub.id, @group.menus.include?(sub) %>
+                <label><%= sub.caption %></label> 
+              </div>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+<% else %>
+  <div class="eight wide column">
+    <div class="ui attached segment">
+      <div class="ui checkbox">
+        <%= check_box_tag "admin_group[menu_ids][]", f.id, @group.menus.include?(f) %>
+        <label><h5 class="ui blue header"><i class="bookmark icon"></i><%= f.caption %></h5></label>
+      </div>
+    </div>
+  </div>
+<% end %>
+

@@ -1,0 +1,23 @@
+<%= hidden_field_tag "step", active %>
+<div class="ui steps">
+  <div class="<%= "active" if (active.to_s == "billing") %> step">
+    <i class="payment icon"></i>
+    <div class="content">
+      <div class="title">Billing</div>
+      <div class="description">選擇付款方式</div>
+    </div>
+  </div>
+  <div class="<%= "active" if (active.to_s == "shipping") %> step">
+    <i class="truck icon"></i>
+    <div class="content">
+      <div class="title">Shipping</div>
+      <div class="description">填寫訂購資料</div>
+    </div>
+  </div>
+  <div class="<%= "active" if (active.to_s == "confirm") %> step">
+    <i class="info icon"></i>
+    <div class="content">
+      <div class="title">確認訂單</div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,26 @@
+<%= 
+  content_tag(:div, class: "ui inverted top attached menu large") do 
+    concat(content_tag(:div, '類別維護', class: "item header"))
+    concat(content_tag(:a, '新增', class: "active item right button", href: new_admin_category_path))
+  end
+%>
+<%= grid(@categories_grid) do |g|
+
+  g.blank_slate  do
+    content_tag(:div, "There are no records", class: "ui tertiary segment") 
+  end
+
+  g.column name: '類別名稱', attribute: 'caption', auto_reload: false, filter: false
+
+  g.column name: '子類別', class: 'left aligned twelve wide' do |category|
+    category.sub_categories.collect{|category| category.caption}.to_sentence(:two_words_connector => ' , ')
+  end
+
+  g.column class: 'center aligned two wide' do |category|
+    content_tag(:div) do
+      concat(link_to('修改', edit_admin_category_path(category), class: 'ui blue mini button'))
+      concat(link_to('移除', category, method: :delete, data: { confirm: '確定要移除?' }, class: 'ui red mini button'))
+    end
+  end
+
+end -%>

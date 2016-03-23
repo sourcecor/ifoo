@@ -1,0 +1,46 @@
+<%= 
+  content_tag(:div, class: "ui inverted top attached menu large") do 
+    concat(content_tag(:div, '商品維護', class: "item header"))
+    concat(content_tag(:a, '新增', class: "active item right button", href: new_admin_product_path))
+  end
+%>
+<%= grid(@products_grid) do |g|
+
+  g.blank_slate  do
+    content_tag(:div, "There are no records", class: "ui tertiary segment") 
+  end
+  
+  g.column class: 'left aligned one wide' do |product|
+    image_tag(product.main_pictures.first.image.thumb.url) unless product.main_pictures.blank?
+  end
+
+  g.column name: '商品名稱', attribute: 'caption', auto_reload: false, filter: false
+
+  g.column name: '定價', attribute: 'unit_price', auto_reload: false, filter: false
+
+  g.column name: '售價', attribute: 'sale_price', auto_reload: false, filter: false
+
+  g.column name: '成本', attribute: 'cost', auto_reload: false, filter: false
+
+  g.column name: '貨號', attribute: 'itemcode', auto_reload: false, filter: false
+
+  g.column name: '數量', class: 'center aligned one wide' do |product|
+    product.sub_products.map{|product| product.qty}.sum
+  end
+
+  g.column name: '規格', class: 'cen aligned two wide' do |product|
+    product.sub_products.collect{|product| "#{product.size} #{product.color}"}.to_sentence(:two_words_connector => ' , ')
+  end
+
+  g.column name: '分類', class: 'cen aligned two wide' do |product|
+    product.categories.collect{|category| category.caption}.to_sentence(:two_words_connector => ' , ')
+  end
+
+  g.column class: 'center aligned two wide' do |product|
+    content_tag(:div) do
+      concat(link_to('修改', edit_admin_product_path(product), class: 'ui blue mini button'))
+      concat(link_to('移除', product, method: :delete, data: { confirm: '確定要移除?' }, class: 'ui red mini button'))
+    end
+  end
+
+end -%>

@@ -1,0 +1,161 @@
+<%= simple_form_for :shipping, url: url_for(:action => 'create', :controller => 'shopping') do |f| %>
+<div class="ui centered grid">
+  <div class="column row">
+  <%= render 'steps', active: :shipping %>
+  </div>
+  <div class="row">
+    <div class="fourteen wide column">
+    <%= render 'shopping_list' %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="fourteen wide column">
+  		<div class="ui segment">
+  		  <h3 class="ui dividing header">收件人資訊</h3>
+        <div class="fields">
+          <div class="eight wide field">
+          <%= f.input :name, label: "姓名", placeholder: "中文全名", required: true %>
+          </div>
+          <div class="eight wide field">
+          <%= f.input :phone, label: "電話", placeholder: "聯絡電話", required: true %>
+          </div>
+        </div>
+  		  <div class="field">
+  		    <label>地址</label>
+  		    <div class="fields">
+            <div class="four wide field">
+              <%= f.input :zipcode, label: "郵遞區號", placeholder: "郵遞區號", required: true %>
+            </div>
+  		      <div class="twelve wide field">
+              <%= f.input :address, label: "地址", placeholder: "送貨地址", required: true %>
+  		      </div>
+  		    </div>
+  		  </div>
+  		</div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="fourteen wide column">
+      <div class="ui segment">
+        <h3 class="ui dividing header">發票資訊</h3>
+        <div class="inline fields">
+          <div class="field">
+            <div class="ui radio checkbox">
+              <%= radio_button_tag "shipping[receipt]", 2, false, class: :hidden %>
+              <label>二聯式發票</label>
+            </div>
+          </div>
+          <div class="field">
+            <div class="ui radio checkbox">
+              <%= radio_button_tag "shipping[receipt]", 3, false, class: :hidden %>
+              <label>三聯式發票</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="fourteen wide column">
+    <div class="ui center aligned vertical segment">
+      <div class="ui buttons">
+	    <a href="javascript:history.back()" class="ui  button"><i class='angle left icon'></i>重新選擇付款方式</a>
+        <div class="or"></div>
+        <%= f.button :button, class: "ui positive button" do %>
+          下一步<i class="angle right icon"></i>
+        <% end %>
+      </div>
+    </div>
+    </div>
+  </div>
+</div>
+<% end %>
+<script>
+  $(function(){
+    $('.ui.form')
+      .form({
+        fields: {
+          name: {
+            identifier  : 'shipping_name',
+            rules: [
+              {
+                type   : 'empty',
+                prompt : 'Please enter your fullname'
+              }
+            ]
+          },
+          phone: {
+            identifier  : 'shipping_phone',
+            rules: [
+              {
+                type   : 'empty',
+                prompt : 'Please enter your phone number'
+              },
+              {
+                type   : 'length[10]',
+                prompt : 'Your phone number must be at least 10 characters'
+              }
+            ]
+          },
+          zipcode: {
+            identifier  : 'shipping_zipcode',
+            rules: [
+              {
+                type   : 'empty',
+                prompt : 'Please enter your phone number'
+              },
+              {
+                type   : 'length[5]',
+                prompt : 'Your zipcode must be at least 5 characters'
+              }
+            ]
+          },
+          address: {
+            identifier  : 'shipping_address',
+            rules: [
+              {
+                type   : 'empty',
+                prompt : 'Please enter your phone number'
+              },
+              {
+                type   : 'length[10]',
+                prompt : 'Your phone number must be at least 10 characters'
+              }
+            ]
+          }
+        }
+      })
+    ;
+    //
+    shipping_name = Cookies.get('shipping_name');
+    $("input[id='shipping_name']").val(shipping_name);
+    shipping_phone = Cookies.get('shipping_phone');
+    $("input[id='shipping_phone']").val(shipping_phone);
+    shipping_zipcode = Cookies.get('shipping_zipcode');
+    $("input[id='shipping_zipcode']").val(shipping_zipcode);
+    shipping_address = Cookies.get('shipping_address');
+    $("input[id='shipping_address']").val(shipping_address);
+    //
+    receipt = Cookies.get('receipt');
+    $("input:radio[name='shipping[receipt]'][value=" + receipt + "]").attr('checked', 'checked');
+    $("input:radio[name='shipping[receipt]']").on('change', function(){
+      receipt = $("input:radio:checked[name='shipping[receipt]']").val();
+      Cookies.set('receipt', receipt);
+    });
+    //
+    $('.ui.form').on('submit', function(){
+
+        shipping_name = $("input[id='shipping_name']").val();
+        Cookies.set('shipping_name', shipping_name);
+      //
+        shipping_phone = $("input[id='shipping_phone']").val();
+        Cookies.set('shipping_phone', shipping_phone);
+      //
+        shipping_zipcode = $("input[id='shipping_zipcode']").val();
+        Cookies.set('shipping_zipcode', shipping_zipcode);
+      //
+        shipping_address = $("input[id='shipping_address']").val();
+        Cookies.set('shipping_address', shipping_address);
+    });
+  });
+</script>

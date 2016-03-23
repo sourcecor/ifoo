@@ -1,0 +1,44 @@
+<div class="ui right wide sidebar vertical menu">
+  <div class="item">
+    <h2 class="ui center aligned icon header">
+      <i class="circular shop icon"></i> 
+      <div class="sub header">
+        採購明細
+      </div>
+    </h2>
+  </div>
+  <% cart.cart_contents.each do |key, value| %>
+  <div class="item" id=<%= key %>>
+    <div class="ui grid">
+      <div class="four wide column">
+        <img src= <%= value["img"] %> >
+      </div>
+      <div class="nine wide column">
+        <div class="ui small header">
+          <%= value["caption"] %>
+          <div class="sub header">
+            <div>貨號:<%= value["itemcode"] %></div>
+            <div>規格:<%= "顏色(#{value['color']})" unless value['color'].blank? %>  
+                    <%= "尺碼(#{value['size']})" unless value['size'].blank? %></div>
+            <div>數量:<%= value["buy_count"] %></div>
+          </div>
+        </div>
+      </div>
+      <div class="three wide middle aligned column">
+        <%= 
+          link_to "<i class='trash icon'></i>".html_safe, cart_del_site_index_path(value), 
+            method: :cart_del, data: { confirm: '確定要移除?' }, class: "ui icon red button"
+        %>
+      </div>
+    </div>
+  </div>
+  <% end %>
+  <% if (cart.cart_count > 0) %>
+  <div class="item">
+    <%= 
+      link_to "前往結帳", new_shopping_path, class: "fluid ui green button"
+    %>
+  </div>
+  <% end %>
+
+</div>

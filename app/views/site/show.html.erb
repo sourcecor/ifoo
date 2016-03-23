@@ -1,0 +1,129 @@
+<div class="ui grid">
+	<div class="two wide column">
+    {類似商品}
+  </div>
+	<div class="fourteen wide column">
+		<div class="ui grid">
+  		<div class="eight wide column">
+        <!-- pictures -->
+        <div class="fotorama" data-nav="thumbs" data-allowfullscreen="true">
+          <% @product.main_pictures.each do |picture| %>
+            <%= content_tag(:a, href: picture.image.medium.url) do
+                concat(image_tag(picture.image.thumb.url))
+              end
+            %>
+          <% end %>
+        </div>
+      </div>
+  		<div class="eight wide column">
+        <div class="ui vertical segment">
+          <div class="ui two column relaxed grid">
+            <div class="column">
+              <h1 class="ui header" style="padding-top: 10px"> 
+                <div class="content">
+                  <%= @product.caption  %>
+                  <div class="sub header"> 
+                    <span style="display: block;">商品編號：</span>
+                    <span style="display: block;" id="lbl_itemcode"> - </span>
+                  </div>
+                </div>
+              </h1>
+              
+            </div>
+            <div class="column">
+              <a class="ui teal right ribbon label" style="margin-left: -10px">新貨到</a>
+              <div style="text-align: right">
+                <del style="display: block; margin: 10px 0px 5px 0px">$<%= @product.unit_price.round %></del>
+                <div style="display: block; color: red;">
+                  <span> NT </span>
+                  <span style="font-size: 3em;">$<%= @product.sale_price.round %></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ui vertical segment">
+          <div class="ui one column relaxed grid">
+            <div class="column">
+              <div class="ui teal large labels">
+                <div class="product color">
+                  <% for color in @product.sub_products.pluck("DISTINCT color") %>
+                    <%= 
+                      content_tag(:a, color, class: "ui label",  "data-value": color) unless color.blank?
+                    %>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+            <div class="column">
+              <div class="ui blue large labels">
+                <div class="product size">
+                  <% @product.sub_products.pluck("DISTINCT size").each do |size| %>
+                    <%= 
+                      content_tag(:a, size, class: "ui label",  "data-value": size)
+                    %>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+            <div class="column">
+              <a class="ui right floated mini button">查看尺寸表</a>
+            </div>
+          </div>
+          <!-- 規格選擇 -->
+        </div>
+        <div class="ui vertical segment">
+          <% if current_user %>
+            <%= simple_form_for :buy, url: cart_add_site_index_path do |f| %>
+              <%= hidden_field_tag "buy[img]", @product.main_pictures.first.image.thumb.url %>
+              <%= hidden_field_tag "buy[caption]", @product.caption %>
+              <%= hidden_field_tag "buy[sale_price]", @product.sale_price %>
+              <%= hidden_field_tag "buy[id]", @product.id %>
+              <%= hidden_field_tag "buy[itemcode]" %>
+              <%= hidden_field_tag "buy[color]" %>
+              <%= hidden_field_tag "buy[size]" %>
+              <div class="inline fields">
+                <div class="twelve wide field">
+                  <label>數量</label>
+                  <%= select_tag "buy[buy_count]", nil, class: "ui dropdown" %>
+                </div>
+                <button class="ui fluid green button" onclick="return check_buy();">放入購物車</button>
+              </div>
+            <% end %>
+            <div class="ui icon info message" style="display: none;" id="sellout">
+              <i class="help circle icon"></i>
+              銷售一空
+            </div>
+          <% else %>
+            <div class="ui warning message">請先登入</div>
+          <% end %>
+          <!-- 加入購物車 -->
+          <!-- 數量先用下拉方式 -->
+<!--             <div class="ui buttons" id="buy_group" style="margin: 5px 20px 0px 0px ">
+              <a class="ui label" id="minus">+</a>
+              <%# text_field_tag :buyCount, nil, disabled: :disabled, maxlength: 2, style: "margin:-1px 0px ;width: 50px" %>
+              <a class="ui label" id="plus">-</a>
+            </div> -->
+        </div>
+      </div>
+    </div>
+
+    <div class="ui vertical segment">
+      <h3 class="ui dividing header"><i class="icon info"></i>產品說明及注意事項</h3>
+      <%= sanitize @product.description %>
+    </div>
+    <div class="ui very relaxed list">
+      <% @product.profile_pictures.each do |picture| %>
+        <%= content_tag(:div, class: "item") do
+            concat(image_tag(picture.image.url, class: "ui fluid image"))
+          end
+        %>
+      <% end %>
+    </div>
+	</div>
+</div>
+<script type="text/javascript">
+  $(function(){
+    $('.product.color a:eq(0)').click();
+  });
+</script>

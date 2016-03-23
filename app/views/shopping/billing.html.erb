@@ -1,0 +1,68 @@
+<%= simple_form_for :billing, url: url_for(:action => 'create', :controller => 'shopping') do |f| %>
+<div class="ui centered grid">
+  <div class="column row">
+  <%= render 'steps', active: :billing %>
+  </div>
+  <div class="row">
+    <div class="fourteen wide column">
+      <h3 class="ui block header">付款方式 </h3>
+      <div class="ui relaxed divided list">
+        <div class="item">
+          <div class="ui radio checkbox">
+            <%= radio_button_tag "billing[paytype]", :shop, true, class: :hidden %>
+            <label class="header">超商取貨付款 - 7-11
+              <div class="description">7-11取貨付款，將酌收 50 元物流費。若單筆購物滿 1000 元，即享有免運費優惠。</div>
+            </label>
+          </div>
+        </div>
+        <div class="item">
+          <div class="ui radio checkbox">
+            <%= radio_button_tag "billing[paytype]", :home, false, class: :hidden %>
+            <label class="header">宅配貨到付款
+              <div class="description">宅配貨到付款，將酌收 50 元物流費。若單筆購物滿 1000 元，即享有免運費優惠（「貨到付款」服務僅限台灣本島）。</div>
+            </label>
+          </div>
+        </div>
+        <div class="item">
+          <div class="ui radio checkbox">
+            <%= radio_button_tag "billing[paytype]", :card, false, class: :hidden %>
+            <label class="header">信用卡線上刷卡
+              <div class="description">信用卡宅配到府，將酌收 50 元物流費。若單筆購物滿 1000 元，即享有免運費優惠。</div>
+            </label>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="row">
+    <div class="fourteen wide column">
+    <%= render 'shopping_list' %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="fourteen wide column">
+    <div class="ui center aligned vertical segment">
+      <div class="ui buttons">
+      <a href="javascript:history.back()" class="ui  button"><i class='angle left icon'></i>繼續購物</a>
+        <div class="or"></div>
+        <%= f.button :button, class: "ui positive button" do %>
+          下一步<i class="angle right icon"></i>
+        <% end %>
+      </div>
+    </div>
+    </div>
+  </div>
+</div>
+<% end %>
+<script>
+  $(function(){
+    paytype = Cookies.get('paytype');
+    $("input:radio[name='billing[paytype]'][value=" + paytype + "]").attr('checked', 'checked');
+    $("input:radio[name='billing[paytype]']").on('change', function(){
+      paytype = $("input:radio:checked[name='billing[paytype]']").val();
+      Cookies.set('paytype', paytype);
+    });
+    //
+  });
+</script>

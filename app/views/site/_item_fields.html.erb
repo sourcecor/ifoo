@@ -1,0 +1,42 @@
+<div class="green card">
+
+  <% if !f.main_pictures.limit(1).offset(1).blank? %>
+  <div class="ui slide masked reveal image">
+    <img src=<%= f.main_pictures.first.image.medium.url %> class="visible content" >
+    <img src=<%= f.main_pictures.limit(1).offset(1).first.image.medium.url %> class="hidden content" >
+  </div>
+  <% else %>
+  <div class="ui image">
+    <img src=<%= f.main_pictures.first.image.medium.url %> class="visible content" >
+  </div>
+  <% end %>
+  <div class="content">
+    <div class="ui header">
+      <%=f.caption %>
+      <div class="sub header" style="margin: 5px 0px">
+        <div class="left floated">
+        <del>NT$<%=f.unit_price.round %></del>
+        </div>
+        <div class="right floated">
+        NT$<%=f.sale_price.round %>
+        </div>
+      </div>
+    </div>
+    <div style="clear:both;"></div>
+    <div class="meta" style="margin-top: 10px">
+      <a>規格</a>
+    </div>
+    <div class="description">
+    <%= f.sub_products.pluck("DISTINCT size").collect{|size| size}.to_sentence(:two_words_connector => ' , ')
+    %>
+    <%= f.sub_products.pluck("DISTINCT color").collect{|color| color}.to_sentence(:two_words_connector => ' , ')
+    %>
+    </div>
+  </div>
+  <div class="extra content">
+    <%= link_to('選購', site_path(:id => f.id), class: "ui tiny green basic button right floated") %>
+    <span><i class="user icon"></i> 75 人購買 </span>
+  </div>
+</div>
+
+

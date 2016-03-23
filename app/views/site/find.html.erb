@@ -1,0 +1,15 @@
+<% if @products.empty? %>
+  <div class="ui icon message">
+    <i class="shop icon"></i>
+    <div class="content">
+      <div class="header"> 查無此商品 </div>
+      <p>請試試熱門關鍵字： 女裝、ZUZU、日本</p>
+    </div>
+  </div>
+<% else %>
+  <div class="ui four cards">
+    <% @products.each do |product| %>
+      <%= render 'item_fields', f: product %>
+    <% end %>
+  </div>
+<% end %>

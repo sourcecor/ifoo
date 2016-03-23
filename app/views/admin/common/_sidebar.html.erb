@@ -1,0 +1,14 @@
+<div class="ui sidebar inverted vertical accordion menu">
+	<div class="item">
+		<h3>SourceCode</h3>
+	</div>
+	<% menus = current_admin_user.menus.where("(
+		admin_users_menus.parent_id IS NULL
+			or
+		admin_users_menus.parent_id =0)
+			and
+		admin_users_menus.position='side'") %>
+	<% menus.each do |sub| %>
+	<%= g_side_menu sub %>
+	<% end %>
+</div>

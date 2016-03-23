@@ -1,0 +1,36 @@
+<%= simple_form_for :confirm, url: url_for(:action => 'create', :controller => 'shopping') do |f| %>
+<div class="ui centered grid">
+  <div class="column row">
+  <%= render 'steps', active: :confirm %>
+  </div>
+  <div class="row">
+    <div class="fourteen wide column">
+    <%= render 'shopping_list' %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="fourteen wide column">
+
+    </div>
+  </div>
+  <div class="row">
+    <div class="fourteen wide column">
+    <div class="ui center aligned vertical segment">
+      <div class="ui buttons">
+	    <a href="javascript:history.back()" class="ui  button"><i class='angle left icon'></i>重新輸入訂購資訊</a>
+        <div class="or"></div>
+        <%= f.button :button, class: "ui blue button" do %>
+          確認<i class="angle right icon"></i>
+        <% end %>
+      </div>
+    </div>
+    </div>
+  </div>
+</div>
+<% end %>
+<script>
+  $(function(){
+
+    //
+  });
+</script>

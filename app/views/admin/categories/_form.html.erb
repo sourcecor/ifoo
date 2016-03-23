@@ -1,0 +1,44 @@
+<%= simple_form_for @category do |f| %>
+  <div class="ui green segment">
+    <div class="ui clearing">
+      <h4 class="ui red huge left floated header"><%= @category.new_record? ? "新增" : "修改" %>類別</h4>
+      <div class="ui buttons right floated sticky">
+        <%= link_to "取消", :back, class: "ui button" %>
+        <div class="or"></div>
+        <%= f.button :submit, "保存", :disable_with => "Submiting..."%>
+      </div>
+    </div>
+  	<div class="field">
+  		<label>大類別</label>
+  		<div class="fields">
+        <i class="icon"></i>
+  		  <%= f.input :caption, wrapper: :input_labeled, label: "標題", placeholder: "標題", :required => true %>
+        <div class="ui eight wide field">
+        <%= f.input :description, wrapper: :input_labeled, label: "說明", placeholder: "說明" %> <!-- spec的name欄位 -->
+        </div>
+  		</div>
+  	</div>
+    <div style="clear:both;"></div>
+  	<div class="field">
+  		<label style="display:inline;">子類別</label>
+  		<%= link_to_add_association '新增', f, :sub_categories, partial: 'category_fields',
+  				"data-association-insertion-node": '.sorting_panel',
+  				"data-association-insertion-method": :append,
+          class: "ui green button",
+          style: "float:right" %>
+          <!-- data-association-insertion-method # :append or :prepend -->
+
+      <div style="clear:both;"></div>
+  		<div class="sorting_panel">
+  	  <!-- nested form從這裡開始 -->
+      <%= f.simple_fields_for :sub_categories do |sub| %>
+        <%= render 'category_fields', f: sub %>
+      <% end %>
+  	  <!-- nested form結束 -->
+  	  </div>
+  	</div>
+    <div style="clear:both;"></div>
+  </div>
+<% end %>
+
+

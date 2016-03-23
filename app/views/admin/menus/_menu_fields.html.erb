@@ -1,0 +1,8 @@
+<div class="nested-fields ui four fields">
+<i class="sort icon" style="margin: 10px 0px; cursor: move;"></i>
+<%= f.input :caption, placeholder: "標題" %> <!-- spec的name欄位 -->
+<%= f.input :action, placeholder: "path or url" %> <!-- spec的detail欄位 -->
+<%= f.input :position, wrapper: :input_dropdown, collection:{'選單'=>'item','標題'=>'header','分隔線'=>'divider'}, :required => true, :default => "item" %>
+<%= f.hidden_field :seq %> <!-- spec的detail欄位 -->
+<%= link_to_remove_association "移除", f, { data: {confirm: '要刪除嗎?'}, class: 'ui red button', style: "height: 36px" } %>
+</div>

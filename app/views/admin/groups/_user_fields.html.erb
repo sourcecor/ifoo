@@ -1,0 +1,6 @@
+<div class="two wide column">
+  <div class="ui checkbox">
+    <%= check_box_tag "admin_group[user_ids][]", f.id, @group.users.include?(f) %>
+    <label><%= f.username %></label>
+  </div>
+</div>

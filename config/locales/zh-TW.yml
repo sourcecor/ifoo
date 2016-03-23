@@ -1,0 +1,7 @@
+activerecord:
+  attributes:
+    product:
+
+  locale_name:
+    en: English
+    de: German-TW

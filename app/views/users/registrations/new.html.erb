@@ -1,0 +1,35 @@
+<div class="ui two column middle aligned relaxed vertical segment grid">
+  <div class="column">
+    <h2 class="ui header"> 使用者註冊 </h2>
+    <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+
+        <%= f.input :email, label: "帳戶", required: true, autofocus: true %>
+        <%= f.input :username, label: "姓名", required: true %>
+        <%= f.input :password, label: "密碼", required: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length) %>
+        <%= f.input :password_confirmation, label: "確認密碼", required: true %>
+
+
+        <%= f.button :submit, "Sign up" %>
+
+    <% end %>
+
+  </div>
+  <div class="ui vertical divider">Or</div>
+  <div class="ui two column centered grid">
+    <div class="column">
+      <%= content_tag(:a, href: user_omniauth_authorize_path(:facebook), class: "ui big facebook button") do
+          concat(content_tag(:i, "", class: "facebook icon"))
+          concat("facebook")
+        end
+      %>
+    </div>
+    <div class="column">
+      <%= content_tag(:a, href: user_omniauth_authorize_path(:google_oauth2), class: "ui big google plus button") do
+          concat(content_tag(:i, "", class: "google plus icon"))
+          concat("google +")
+        end
+      %>
+    </div>
+  </div>
+</div>
+<%= render "users/shared/links" %>

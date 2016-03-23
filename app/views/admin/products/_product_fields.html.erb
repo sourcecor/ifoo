@@ -1,0 +1,9 @@
+<div class="nested-fields ui five fields">
+<i class="sort icon" style="margin: 10px 0px; cursor: move;"></i>
+<%= f.input :size, wrapper: :input_labeled, label: "尺碼", placeholder: "尺碼 S/M/L" %> <!-- spec的name欄位 -->
+<%= f.input :color, wrapper: :input_labeled, label: "顏色", placeholder: "顏色 紅/藍/綠" %> <!-- spec的detail欄位 -->
+<%= f.input :qty, wrapper: :input_labeled, label: "數量", placeholder: "數量" %>
+<%= f.input :itemcode, wrapper: :input_labeled, label: "商店貨號", placeholder: "商店貨號" %>
+<%= f.hidden_field :seq %> <!-- spec的detail欄位 -->
+<%= link_to_remove_association "移除", f, { data: {confirm: '要刪除嗎?'}, class: 'ui red button', style: "height: 36px" } %>
+</div>
