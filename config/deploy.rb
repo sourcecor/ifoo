@@ -1,10 +1,10 @@
 # config valid only for current version of Capistrano
 lock '3.4.0'
 
-set :application, 'fragrance101'
-set :repo_url, 'git@github.com:sourcecor/fragrance101.git' # Edit this to match your repository
+set :application, 'ifoo'
+set :repo_url, 'git@github.com:sourcecor/ifoo.git' # Edit this to match your repository
 set :branch, :master
-set :deploy_to, '/home/deploy/fragrance101'
+set :deploy_to, '/home/deploy/ifoo'
 set :pty, true
 set :linked_files, %w{config/database.yml config/application.yml}
 set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system public/uploads}
