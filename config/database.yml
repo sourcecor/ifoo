@@ -82,4 +82,4 @@ production:
   <<: *default
   database: ifoo_production
   username: ifoo
-  password: <%= ENV['FRAGRANCE101_DATABASE_PASSWORD'] %>
+  password: <%= ENV['ifoo_DATABASE_PASSWORD'] %>

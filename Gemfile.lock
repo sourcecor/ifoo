@@ -36,6 +36,7 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
+    addressable (2.3.6)
     arel (6.0.3)
     bcrypt (3.1.11)
     builder (3.2.2)
@@ -117,6 +118,10 @@ GEM
     kaminari (0.16.3)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
+    launchy (2.4.2)
+      addressable (~> 2.3)
+    letter_opener (1.2.0)
+      launchy (~> 2.2)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
     mail (2.6.3)
@@ -252,6 +257,7 @@ DEPENDENCIES
   jquery-turbolinks
   jquery-ui-rails
   js_cookie_rails
+  letter_opener
   mini_magick
   omniauth
   omniauth-facebook
@@ -268,4 +274,4 @@ DEPENDENCIES
   wice_grid (~> 3.5)
 
 BUNDLED WITH
-   1.10.6
+   1.11.2
