@@ -1,5 +1,5 @@
-<p>Welcome <%= @email %>!</p>
+<p>歡迎註冊 air-fitsense <%= @email %>!</p>
 
-<p>You can confirm your account email through the link below:</p>
+<p>您可點選以下的啟用帳號連結</p>
 
-<p><%= link_to 'Confirm my account', confirmation_url(@resource, confirmation_token: @token) %></p>
+<p><%= link_to '啟用帳號', confirmation_url(@resource, confirmation_token: @token) %></p>
