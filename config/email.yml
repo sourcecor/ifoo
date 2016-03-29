@@ -1,0 +1,8 @@
+production:
+  address: "smtp.mailgun.org"
+  port: 587"
+  domain: "mg.air-fitsense.com"
+  authentication: "plain"
+  user_name: "postmaster@mg.air.air-fitsense.com"
+  password: "22401809"
+  enable_starttls_auto: true
