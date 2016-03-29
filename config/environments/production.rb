@@ -80,5 +80,5 @@ Rails.application.configure do
   #config.action_mailer.default_url_options = { :host => 'localhost:3000' }
   config.action_mailer.default_url_options = { :host => 'www.air-fitsense.com' }
   config.action_mailer.delivery_method = :smtp
-  cconfig.action_mailer.smtp_settings = config_for(:email).symbolize_keys
+  config.action_mailer.smtp_settings = config_for(:email).symbolize_keys
 end
