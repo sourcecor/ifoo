@@ -14,3 +14,4 @@
 #Ignore database.yml , application.yml
 /config/database.yml
 /config/application.yml
+/config/mail.yml

@@ -17,6 +17,7 @@ gem 'hirb'
 gem 'cocoon'
 # user authorized
 #gem 'devise', :git => 'https://github.com/plataformatec/devise.git'
+gem 'therubyracer'
 gem 'devise'
 gem 'omniauth'
 gem 'omniauth-facebook'
@@ -52,6 +53,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'pg', '~> 0.15'
 gem 'figaro'
 gem 'puma'
+gem 'mailgun_rails'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

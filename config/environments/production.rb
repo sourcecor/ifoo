@@ -80,12 +80,5 @@ Rails.application.configure do
   #config.action_mailer.default_url_options = { :host => 'localhost:3000' }
   config.action_mailer.default_url_options = { :host => 'www.air-fitsense.com' }
   config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = {
-    port:           587,
-    address:        "smtp.mailgun.org",
-    user_name:      "postmaster@mg.air-fitsense.com", # 你的 mailgun 的 user_name ( 見作業 1 解答 )
-    password:       "22401809", # 你的 mailgun 的 password ( 見作業 1 解答 )
-    domain:         "mg.air-fitsense.com",
-    authentication: :plain,
-  }
+  cconfig.action_mailer.smtp_settings = config_for(:email).symbolize_keys
 end
