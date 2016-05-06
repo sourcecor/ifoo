@@ -39,10 +39,10 @@ Rails.application.configure do
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
   #config.action_mailer.default_url_options = { :host => 'localhost:3000' }
-  #config.action_mailer.default_url_options = { :host => 'ifoo.dev' }
-  # open mail in browser when in develop mode
-  #config.action_mailer.delivery_method = :letter_opener
   config.action_mailer.default_url_options = { :host => 'ifoo.dev' }
+  # open mail in browser when in develop mode
+  config.action_mailer.delivery_method = :letter_opener
+  #config.action_mailer.default_url_options = { :host => 'ifoo.dev' }
   #config.action_mailer.delivery_method = :smtp
   #config.action_mailer.smtp_settings = {
   #  port:           587,
@@ -52,11 +52,11 @@ Rails.application.configure do
   #  domain:         "sandbox311f0495e3454b82a0f3661a65c6b711.mailgun.org",
   #  authentication: :plain,
   #}
-  config.action_mailer.delivery_method = :mailgun
-  config.action_mailer.mailgun_settings = {
-        api_key: '<mailgun api key>',
-        domain:  '<mailgun domain>'
-  }
+  #config.action_mailer.delivery_method = :mailgun
+  #config.action_mailer.mailgun_settings = {
+  #      api_key: '<mailgun api key>',
+  #      domain:  '<mailgun domain>'
+  #}
 
 
 end

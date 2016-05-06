@@ -1,0 +1,113 @@
+<script type="text/javascript">
+  $(function(){
+    $('#filter_status').on('change',function(){
+      $('#filter_form').submit();
+    })
+  });
+</script>
+
+<h2>訂單列表 </h2>
+
+<%= simple_form_for :filter ,url: admin_orders_path,html:{:id =>'filter_form'} do |f| %>
+  <div class="ui green segment">
+    <div class="field">
+      <div class="four fields">
+        <i class="icon"></i>
+        <%= f.input :status, wrapper: :input_dropdown, collection:{'訂單成立'=>'order_placed',
+          '訂單已付款'=>'paid','出貨中'=>'shipping','已到貨'=>'shipped','取消訂單等待退款' =>'paid_on_return',
+          '等待退貨'=> 'goods_on_return','商品退貨到倉'=>'goods_returned','取消訂單結案'=>'cancel_closed',
+          '退貨結案'=>'returne_closed','出貨結案'=>'ship_closed'}, :required => true,
+           selected: params[:filter] %>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<%= grid(@orders_grid) do |g|
+
+  g.blank_slate  do
+    content_tag(:div, "There are no records", class: "ui tertiary segment")
+  end
+
+
+  g.column name: '訂單編號',  attribute: 'trsNo', auto_reload: false, filter: false
+
+  g.column name: '訂單日期', attribute: 'created_at', auto_reload: false, filter: false  do |order|
+    render_order_timestamp(order)
+  end
+
+  g.column name: '訂單狀態', attribute: 'aasm_state', auto_reload: false, filter: false  do |order|
+    #order.user.username
+    #order.aasm_state
+    render_order_state(order)
+  end
+  #g.column name: '訂購人'  do  |order|
+    # order.user.username
+
+  #end
+  g.column name: '訂購人',  attribute: 'username' , assoc: :user, auto_reload: false, filter: false
+
+
+  #g.column name: '訂購人', model: 'User',attribute: 'username'   do  |order|
+  #   order.user.username
+  #end
+
+
+  g.column class: 'center aligned three wide' do |order|
+
+
+    content_tag(:div) do
+      #case "#{params[:filter]}"
+      case order.aasm_state
+        when "order_placed"
+          concat(link_to('取消訂單', cancel_order_admin_order_path(order), method: :cancel_order, data: { confirm: '確定要取消訂單?' }, class: 'ui blue mini button'))
+          concat(link_to('付款', make_payment_admin_order_path(order), method: :make_payment, data: { confirm: '確定要付款?' }, class: 'ui blue mini button'))
+
+        when "paid"
+          concat(link_to('取消訂單申請退款', ask_for_cancel_admin_order_path(order), method: :ask_for_cancel, data: { confirm: '確定要取消訂單?' }, class: 'ui blue mini button'))
+
+          concat(link_to("出貨", edit_admin_order_path(order,:act => "ship"), class: 'ui blue mini button'))
+
+        when "paid_on_return"
+
+          concat(link_to('訂單取消退款', paid_return_admin_order_path(order), method: :paid_return, data: { confirm: '確定退款?' }, class: 'ui blue mini button'))
+
+
+        when "shipping"
+
+          concat(link_to('已到貨', deliver_admin_order_path(order), method: :deliver, data: { confirm: '確定已到貨?' }, class: 'ui blue mini button'))
+
+        when "shipped"
+
+          concat(link_to('客戶要求退貨', ask_for_return_admin_order_path(order), method: :ask_for_return, data: { confirm: '退貨?' }, class: 'ui blue mini button'))
+
+          concat(link_to('出貨結案', wait_ten_days_admin_order_path(order), method: :wait_ten_days, data: { confirm: '確定出貨結案?' }, class: 'ui blue mini button'))
+
+        when "goods_on_return"
+
+          concat(link_to('退貨到倉', return_goods_admin_order_path(order), method: :return_goods, data: { confirm: '確定退貨到倉?' }, class: 'ui blue mini button'))
+
+        when "goods_returned"
+
+          concat(link_to('退貨退款', make_payback_admin_order_path(order), method: :make_payback, data: { confirm: '確定退貨退款?' }, class: 'ui blue mini button'))
+
+        else
+          concat(link_to('查看訂單明細', admin_order_path(order), class: 'ui blue mini button'))
+
+      end
+    end
+  end
+
+
+  # g.column class: 'center aligned two wide' do |order|
+  #   content_tag(:div) do
+  #     concat(link_to('修改', edit_admin_order_path(order), class: 'ui blue mini button'))
+  #     concat(link_to('移除', menu, method: :delete, data: { confirm: '確定要移除?' }, class: 'ui red mini button'))
+  #   end
+  # end
+
+end -%>
+
+
+
+

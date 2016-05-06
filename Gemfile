@@ -1,7 +1,8 @@
 source 'https://rubygems.org'
 
 gem 'simple_form'
-gem 'wice_grid', '~> 3.5'
+#gem 'wice_grid', '~> 3.5'
+gem "wice_grid", '3.6.0.pre4'
 gem 'semantic-ui-sass'
 gem 'font-awesome-sass',  '~> 4.3'
 # image uploader
@@ -23,7 +24,9 @@ gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
 gem "domp"
+gem 'rails-i18n', github: 'svenfuchs/rails-i18n', branch: 'rails-4-x'
 
+gem "aasm"
 #
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5'

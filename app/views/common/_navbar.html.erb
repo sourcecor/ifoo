@@ -1,8 +1,8 @@
 <script>
   $(function(){
-    $('.menu .brand')
+    $('.menu .cat1')
       .popup({
-        popup : $('brand'),
+        popup : $('cat1'),
         inline   : true,
         hoverable: true,
         position : 'bottom left',
@@ -12,9 +12,33 @@
         }
       })
     ;
-    $('.menu .special')
+    $('.menu .cat2')
       .popup({
-        popup : $('special'),
+        popup : $('cat2'),
+        inline   : true,
+        hoverable: true,
+        position : 'bottom left',
+        delay: {
+          show: 300,
+          hide: 800
+        }
+      })
+    ;
+     $('.menu .cat3')
+      .popup({
+        popup : $('cat3'),
+        inline   : true,
+        hoverable: true,
+        position : 'bottom left',
+        delay: {
+          show: 300,
+          hide: 800
+        }
+      })
+    ;
+    $('.menu .cat4')
+      .popup({
+        popup : $('cat4'),
         inline   : true,
         hoverable: true,
         position : 'bottom left',
@@ -32,8 +56,10 @@
         concat(image_tag("logo.png", class: "logo"))
       end
     %>
-    <a class="brand item">品牌<i class="dropdown icon"></i> </a>
-    <a class="special item">特賣會<i class="dropdown icon"></i> </a>
+    <a class="cat1 item"><%= t('site.nav.catalog.cat1') %><i class="dropdown icon"></i> </a>
+    <a class="cat2 item"><%= t('site.nav.catalog.cat2') %><i class="dropdown icon"></i> </a>
+    <a class="cat3 item"><%= t('site.nav.catalog.cat3') %><i class="dropdown icon"></i> </a>
+    <a class="cat4 item"><%= t('site.nav.catalog.cat4') %><i class="dropdown icon"></i> </a>
     <div class="right menu">
       <div class="item">
         <div class="ui icon input">
@@ -49,25 +75,46 @@
           <%= current_user.username %>
           <i class="dropdown icon"></i>
           <div class="menu">
-          <div class="item">我的帳戶</div>
-          <%= link_to('修改密碼', edit_registration_path(:user), class: "item") %>
-          <%= link_to('登出', destroy_user_session_path, :method => :delete, class: "item") %>
+            <!-- 我的帳戶 -->
+          <div class="item"><%= t('site.nav.islogin.myaccount') %></div>
+            <!-- 修改密碼 -->
+          <%= link_to(t('site.nav.islogin.chgpassword'), edit_registration_path(:user), class: "item") %>
+            <!-- 登出 -->
+          <%= link_to(t('site.nav.islogin.logout'), destroy_user_session_path, :method => :delete, class: "item") %>
           </div>
         </div>
         <a class="item cart">
-          <i class="icon in cart large"></i>購物車
+          <!-- 購物車 -->
+          <i class="icon in cart large"></i><%= t('site.nav.islogin.cart') %>
           <div class="ui top right attached red <%= "hidden" if (cart.cart_count == 0) %> label"><%= cart.cart_count %></div>
         </a>
       <% else %>
-        <%= link_to('註冊', new_registration_path(:user), class: "item") %>
-        <%= link_to('登入', new_session_path(:user), class: "item") %>
+        <!-- 註冊 -->
+        <%= link_to(t('site.nav.notlogin.reg'), new_registration_path(:user), class: "item") %>
+        <!-- 登入 -->
+        <%= link_to(t('site.nav.notlogin.login'), new_session_path(:user), class: "item") %>
       <% end %>
+      <div class="ui right dropdown item">
+        <i class="world icon"></i>
+        語系/语系/lang
+        <i class="dropdown icon"></i>
+        <div class="menu">
+          <%= link_to('繁體', root_path(:locale => "zh-TW")  ,class: "item") %>
+          <%= link_to('简体', root_path(:locale => "zh-CN") , class: "item") %>
+
+          <%= link_to('English', root_path(:locale => "en") , class: "item") %>
+
+
+        </div>
+      </div>
+
     </div>
   </div>
 </div>
-<!-- brand -->
-<% categories = Admin::Category.where(:description => '品牌') %>
-<brand class="ui flowing popup bottom left transition hidden">
+<!-- cat1 -->
+<% categories = Admin::Category.iwhere(" where  description = 'cat1' ") %>
+
+<cat1 class="ui flowing popup bottom left transition hidden">
   <div class="ui <%= categories.count.humanize %> column relaxed divided grid">
     <% categories.each do |category| %>
     <div class="column">
@@ -75,17 +122,19 @@
       <%= content_tag(:a, category.caption, href: find_site_index_path(:keywords => category.caption)) %>
       </h4>
       <div class="ui link list">
-        <% category.sub_categories.each do |sub| %>
+        <% sub_cato = Admin::Category.sub_cat(category.id) %>
+        <% sub_cato.each do |sub| %>
           <%= content_tag(:a, sub.caption, href: find_site_index_path(:keywords => sub.caption), class: "item", style: "width: 100px") %>
         <% end %>
       </div>
     </div>
     <% end %>
   </div>
-</brand>
-<!-- special -->
-<% categories = Admin::Category.where(:description => '特賣會') %>
-<special class="ui flowing popup bottom left transition hidden">
+</cat1>
+<!-- cat2 -->
+<% categories = Admin::Category.iwhere(" where  description = 'cat2' ") %>
+
+<cat2 class="ui flowing popup bottom left transition hidden">
   <div class="ui <%= categories.count.humanize %> column relaxed divided grid">
     <% categories.each do |category| %>
     <div class="column">
@@ -93,11 +142,54 @@
       <%= content_tag(:a, category.caption, href: find_site_index_path(:keywords => category.caption)) %>
       </h4>
       <div class="ui link list">
-        <% category.sub_categories.each do |sub| %>
+        <% sub_cato = Admin::Category.sub_cat(category.id) %>
+        <% sub_cato.each do |sub| %>
           <%= content_tag(:a, sub.caption, href: find_site_index_path(:keywords => sub.caption), class: "item", style: "width: 100px") %>
         <% end %>
       </div>
     </div>
     <% end %>
   </div>
-</special>
+</cat2>
+
+<!-- cat3 -->
+<% categories = Admin::Category.iwhere(" where  description = 'cat3' ") %>
+
+<cat3 class="ui flowing popup bottom left transition hidden">
+  <div class="ui <%= categories.count.humanize %> column relaxed divided grid">
+    <% categories.each do |category| %>
+    <div class="column">
+      <h4 class="ui header">
+      <%= content_tag(:a, category.caption, href: find_site_index_path(:keywords => category.caption)) %>
+      </h4>
+      <div class="ui link list">
+        <% sub_cato = Admin::Category.sub_cat(category.id) %>
+        <% sub_cato.each do |sub| %>
+          <%= content_tag(:a, sub.caption, href: find_site_index_path(:keywords => sub.caption), class: "item", style: "width: 100px") %>
+        <% end %>
+      </div>
+    </div>
+    <% end %>
+  </div>
+</cat3>
+
+<!-- cat4 -->
+<% categories = Admin::Category.iwhere(" where  description = 'cat4' ") %>
+
+<cat4 class="ui flowing popup bottom left transition hidden">
+  <div class="ui <%= categories.count.humanize %> column relaxed divided grid">
+    <% categories.each do |category| %>
+    <div class="column">
+      <h4 class="ui header">
+      <%= content_tag(:a, category.caption, href: find_site_index_path(:keywords => category.caption)) %>
+      </h4>
+      <div class="ui link list">
+        <% sub_cato = Admin::Category.sub_cat(category.id) %>
+        <% sub_cato.each do |sub| %>
+          <%= content_tag(:a, sub.caption, href: find_site_index_path(:keywords => sub.caption), class: "item", style: "width: 100px") %>
+        <% end %>
+      </div>
+    </div>
+    <% end %>
+  </div>
+</cat4>

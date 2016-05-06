@@ -14,9 +14,19 @@
         <i class="icon"></i>
   		  <%= f.input :caption, wrapper: :input_labeled, label: "標題", placeholder: "標題", :required => true %>
         <div class="ui eight wide field">
-        <%= f.input :description, wrapper: :input_labeled, label: "說明", placeholder: "說明" %> <!-- spec的name欄位 -->
+        <%= f.input :description, wrapper: :input_labeled, label: "說明", placeholder: "說明" %> <!--
+        spec的name欄位 -->
         </div>
-  		</div>
+      </div>
+      <div class="fields">
+        <i class="icon"></i>
+        <%= f.input :caption_s, wrapper: :input_labeled, label: "標題(簡體)", placeholder: "標題(簡體)", :required => true %>
+
+      </div>
+      <div class="fields">
+        <i class="icon"></i>
+        <%= f.input :caption_e, wrapper: :input_labeled, label: "標題(英文)", placeholder: "標題(英文)", :required => true %>
+      </div>
   	</div>
     <div style="clear:both;"></div>
   	<div class="field">

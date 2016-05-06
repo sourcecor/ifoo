@@ -4,5 +4,5 @@ production:
   domain: "mg.air-fitsense.com"
   authentication: "plain"
   user_name: "postmaster@mg.air.air-fitsense.com"
-  password: "22401809"
+  password: "h23436358"
   enable_starttls_auto: true

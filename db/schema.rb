@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160301123359) do
+ActiveRecord::Schema.define(version: 20160505010554) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,6 +50,8 @@ ActiveRecord::Schema.define(version: 20160301123359) do
     t.integer  "seq"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.string   "caption_s"
+    t.string   "caption_e"
   end
 
   create_table "category_products", force: :cascade do |t|
@@ -77,6 +79,14 @@ ActiveRecord::Schema.define(version: 20160301123359) do
 
   add_index "ckeditor_assets", ["assetable_type", "assetable_id"], name: "idx_ckeditor_assetable", using: :btree
   add_index "ckeditor_assets", ["assetable_type", "type", "assetable_id"], name: "idx_ckeditor_assetable_type", using: :btree
+
+  create_table "form_numbers", force: :cascade do |t|
+    t.string   "trsType",    limit: 2
+    t.string   "yymm",       limit: 6
+    t.integer  "seq"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
 
   create_table "group_menus", id: false, force: :cascade do |t|
     t.integer  "group_id"
@@ -129,17 +139,27 @@ ActiveRecord::Schema.define(version: 20160301123359) do
     t.datetime "updated_at",                         null: false
   end
 
+  create_table "order_logs", force: :cascade do |t|
+    t.string   "username"
+    t.string   "aasm_state"
+    t.integer  "order_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "orders", force: :cascade do |t|
     t.integer  "user_id"
-    t.decimal  "total_amount",     precision: 10, scale: 2
+    t.decimal  "total_amount",                precision: 10, scale: 2
     t.integer  "qty_amount"
     t.string   "shipping_name"
     t.string   "shipping_phone"
     t.string   "shipping_zipcode"
     t.string   "shipping_address"
     t.string   "status"
-    t.datetime "created_at",                                null: false
-    t.datetime "updated_at",                                null: false
+    t.datetime "created_at",                                           null: false
+    t.datetime "updated_at",                                           null: false
+    t.string   "aasm_state"
+    t.string   "trsNo",            limit: 12
   end
 
   create_table "pictures", force: :cascade do |t|
@@ -172,12 +192,20 @@ ActiveRecord::Schema.define(version: 20160301123359) do
   create_table "products", force: :cascade do |t|
     t.string   "caption"
     t.text     "description"
-    t.decimal  "unit_price",  precision: 8, scale: 2
-    t.decimal  "sale_price",  precision: 8, scale: 2
-    t.decimal  "cost",        precision: 8, scale: 2
+    t.decimal  "unit_price",    precision: 8, scale: 2
+    t.decimal  "sale_price",    precision: 8, scale: 2
+    t.decimal  "cost",          precision: 8, scale: 2
     t.string   "itemcode"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
+    t.string   "caption_s"
+    t.text     "description_s"
+    t.decimal  "unit_price_s",  precision: 8, scale: 2
+    t.decimal  "sale_price_s",  precision: 8, scale: 2
+    t.string   "caption_e"
+    t.text     "description_e"
+    t.decimal  "unit_price_e",  precision: 8, scale: 2
+    t.decimal  "sale_price_e",  precision: 8, scale: 2
   end
 
   create_table "question_answers", force: :cascade do |t|

@@ -4,15 +4,15 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.input :email, label: "帳號", required: true, autofocus: true %>
-    <%= f.input :username, label: "姓名", required: true %>
+    <%= f.input :email, label: t('new.reg.email',default:'Account(Email)'), required: true, autofocus: true %>
+    <%= f.input :username, label: t('new.reg.username',default:'Your Name'), required: true %>
     <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
       <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
     <% end %>
 
-    <%= f.input :password, label: "密碼", autocomplete: "off", hint: "leave it blank if you don't want to change it", required: false %>
-    <%= f.input :password_confirmation, label:"密碼確認", required: false %>
-    <%= f.input :current_password, label:"目前密碼", hint: "we need your current password to confirm your changes", required: true %>
+    <%= f.input :password, label: t('new.reg.password',default:'Password'), autocomplete: "off", hint: "leave it blank if you don't want to change it", required: false %>
+    <%= f.input :password_confirmation, label:t('new.reg.password_confirmation',default:'Confirm Password'), required: false %>
+    <%= f.input :current_password, label:t('new.reg.curpassword',default:'Current Password'), hint: "we need your current password to confirm your changes", required: true %>
   </div>
 
   <div class="form-actions">

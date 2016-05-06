@@ -1,0 +1,45 @@
+<%= simple_form_for [:admin,@order] do |f| %>
+  <div class="ui green segment">
+    <div class="ui clearing">
+      <h4 class="ui red huge left floated header">訂單出貨</h4>
+      <div class="ui buttons right floated sticky">
+        <%= link_to "返回", :back, class: "ui button" %>
+      </div>
+    </div>
+    <div class="field">
+      <label>寄送資訊</label>
+      <div class="fields">
+        <i class="icon"></i>
+        <div class="ui two wide field">
+        <%= f.input :shipping_name, wrapper: :input_labeled, label: "收件人",readonly: true  %>
+        </div>
+        <div class="ui two wide field">
+        <%= f.input :shipping_phone, wrapper: :input_labeled, label: "電話" ,readonly: true %>
+        </div>
+        <div class="ui two wide field">
+        <%= f.input :shipping_zipcode, wrapper: :input_labeled, label: "郵遞區號",readonly: true  %>
+        </div>
+        <div class="ui six wide field">
+        <%= f.input :shipping_address, wrapper: :input_labeled, label: "地址",readonly: true  %>
+        </div>
+        <div class="ui two wide field">
+        <%= f.input :qty_amount, wrapper: :input_labeled, label: "總數量",readonly: true  %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<div class="ui green segment">
+  <div class="ui clearing">
+    <label>商品資訊</label>
+  </div>
+<%= grid(@order_detail_grid) do |g|
+  g.column name: '產品編號',attribute: 'itemcode', auto_reload: false, filter: false
+  g.column name: '品名',attribute: 'itemname', auto_reload: false, filter: false
+  g.column name: '顏色',attribute: 'color', auto_reload: false, filter: false
+  g.column name: '尺寸',attribute: 'size', auto_reload: false, filter: false
+  g.column name: '數量',attribute: 'qty', auto_reload: false, filter: false
+
+end -%>
+</div>

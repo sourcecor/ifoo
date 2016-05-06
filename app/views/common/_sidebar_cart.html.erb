@@ -1,9 +1,10 @@
 <div class="ui right wide sidebar vertical menu">
   <div class="item">
     <h2 class="ui center aligned icon header">
-      <i class="circular shop icon"></i> 
+      <i class="circular shop icon"></i>
+      <!-- 採購明細 -->
       <div class="sub header">
-        採購明細
+        <%= t('site.side.title') %>
       </div>
     </h2>
   </div>
@@ -17,16 +18,20 @@
         <div class="ui small header">
           <%= value["caption"] %>
           <div class="sub header">
-            <div>貨號:<%= value["itemcode"] %></div>
-            <div>規格:<%= "顏色(#{value['color']})" unless value['color'].blank? %>  
-                    <%= "尺碼(#{value['size']})" unless value['size'].blank? %></div>
-            <div>數量:<%= value["buy_count"] %></div>
+            <!-- 貨號 -->
+            <div><%= t('site.side.itemcode') %>:<%= value["itemcode"] %></div>
+            <!-- 顏色 -->
+            <div><%= t('site.side.color') %>:<%=  value['color'] unless value['color'].blank? %>
+            <!-- 尺碼 -->
+            <%=  t('site.side.size') %>:<%=  value['size']  unless value['size'].blank? %></div>
+            <!-- 數量 -->
+            <div><%=  t('site.side.qty') %>:<%= value["buy_count"] %></div>
           </div>
         </div>
       </div>
       <div class="three wide middle aligned column">
-        <%= 
-          link_to "<i class='trash icon'></i>".html_safe, cart_del_site_index_path(value), 
+        <%=
+          link_to "<i class='trash icon'></i>".html_safe, cart_del_site_index_path(value),
             method: :cart_del, data: { confirm: '確定要移除?' }, class: "ui icon red button"
         %>
       </div>
@@ -35,7 +40,7 @@
   <% end %>
   <% if (cart.cart_count > 0) %>
   <div class="item">
-    <%= 
+    <%=
       link_to "前往結帳", new_shopping_path, class: "fluid ui green button"
     %>
   </div>

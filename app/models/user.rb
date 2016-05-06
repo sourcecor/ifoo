@@ -7,12 +7,14 @@ class User < ActiveRecord::Base
 
     create(attributes)
   end
+  has_many :orders, foreign_key: "user_id", dependent: :destroy
+
 
   has_many :authentications, class_name: 'UserAuthentication', dependent: :destroy
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
 
-  devise :omniauthable, :database_authenticatable, :registerable, 
+  devise :omniauthable, :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
 
 end

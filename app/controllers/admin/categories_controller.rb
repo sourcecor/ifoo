@@ -45,8 +45,8 @@ private
   end
 
   def category_params
-    params.require(:admin_category).permit(:caption, :description, :parent_id, :seq,
-      {sub_categories_attributes: [:parent_id, :id, :caption, :description, :seq, :_destroy]})
+    params.require(:admin_category).permit(:caption, :description,:caption_s,:caption_e, :parent_id, :seq,
+      {sub_categories_attributes: [:parent_id, :id, :caption,:caption_s,:caption_e,:description, :seq, :_destroy]})
 
   end
 end

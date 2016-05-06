@@ -1,17 +1,41 @@
 class SiteController < ApplicationController
 
   def index
-    
+    flash[:notice] =   I18n.locale
   end
 
   def find
     keywords = params[:keywords]
     if !keywords.blank?
       @products = Admin::Product.all
-      @products = @products.where(["caption LIKE ?", "%#{keywords}%"])
-      if @products.empty?
-        categories = Admin::Category.where(["caption LIKE ?", "%#{keywords}%"])
-        @products = categories.first.products unless categories.first.nil?
+      case I18n.locale.to_s
+        when "zh-TW"
+          @products = @products.where(["caption LIKE ?", "%#{keywords}%"])
+          if @products.empty?
+            categories = Admin::Category.where(["caption LIKE ?", "%#{keywords}%"])
+            @products = categories.first.products unless categories.first.nil?
+          end
+
+        when "zh-CN"
+          @products = @products.where(["caption_s LIKE ?", "%#{keywords}%"])
+          if @products.empty?
+            categories = Admin::Category.where(["caption_s LIKE ?", "%#{keywords}%"])
+            @products = categories.first.products unless categories.first.nil?
+          end
+
+        when "en"
+          @products = @products.where(["caption_e LIKE ?", "%#{keywords}%"])
+          if @products.empty?
+            categories = Admin::Category.where(["caption_e LIKE ?", "%#{keywords}%"])
+            @products = categories.first.products unless categories.first.nil?
+          end
+
+        else
+          @products = @products.where(["caption_e LIKE ?", "%#{keywords}%"])
+          if @products.empty?
+            categories = Admin::Category.where(["caption_e LIKE ?", "%#{keywords}%"])
+            @products = categories.first.products unless categories.first.nil?
+          end
       end
     else
       redirect_to :action => :index
@@ -47,7 +71,7 @@ class SiteController < ApplicationController
       # render :json => params[:itemcode]
     # end
   end
-	
+
   def query_params
     params.require(:buy).permit(:id, :caption, :img, :buy_count, :item_id, :itemcode, :color, :size, :sale_price)
   end

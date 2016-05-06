@@ -1,13 +1,13 @@
 <div class="ui two column middle aligned relaxed vertical segment grid">
   <div class="column">
-    <h2 class="ui header"> 使用者註冊 </h2>
+    <h2 class="ui header"> <%=  t('new.reg.title',default:'title') %> </h2>
     <%#= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
     <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
 
-        <%= f.input :email, label: "帳戶", required: true, autofocus: true %>
-        <%= f.input :username, label: "姓名", required: true %>
-        <%= f.input :password, label: "密碼", required: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length) %>
-        <%= f.input :password_confirmation, label: "確認密碼", required: true %>
+        <%= f.input :email, label: t('new.reg.email',default:'Account(Email)'), required: true, autofocus: true %>
+        <%= f.input :username, label: t('new.reg.username',default:'Your Name'), required: true %>
+        <%= f.input :password, label: t('new.reg.password',default:'Password'), required: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length) %>
+        <%= f.input :password_confirmation, label: t('new.reg.password_confirmation',default:'Confirm Password'), required: true %>
 
 
         <%= f.button :submit, "Sign up" %>

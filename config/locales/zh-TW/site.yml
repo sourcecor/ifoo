@@ -1,0 +1,29 @@
+zh-TW:
+  site:
+    nav:
+      catalog:
+        cat1: 衣服
+        cat2: 鞋款
+        cat3: 包款
+        cat4: 飾品
+      notlogin:
+        login: 登入
+        reg:  註冊
+      islogin:
+        myaccount: 我的帳戶
+        chgpassword: 修改密碼
+        logout: 登出
+        cart: 購物車
+
+    side:
+      title: 採購明細
+      itemcode: 貨號
+      spec: 規格
+      color: 顏色
+      size: 尺碼
+      qty:  數量
+      confirmmsg: 確定要移除？
+      checkout: 前往結帳
+
+    footer:
+      about: 關於MJP

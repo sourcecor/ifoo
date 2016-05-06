@@ -11,4 +11,54 @@ class Admin::Category < ActiveRecord::Base
 	has_many :products, through: :category_products
 	has_many :category_products, dependent: :destroy
 
+  attr_accessor :locale
+
+  def self.iwhere(str)
+
+    case  I18n.locale.to_s
+
+      when "en"
+
+        c = Admin::Category.find_by_sql("Select id,caption_e as caption, description
+                                     from categories "+ str )
+
+      when "zh-TW"
+
+        c = Admin::Category.find_by_sql("Select id,caption as caption, description
+                                     from categories "+ str )
+      when "zh-CN"
+
+        c = Admin::Category.find_by_sql("Select id,caption_s as caption, description
+                                     from categories "+ str )
+      else
+
+        c = Admin::Category.find_by_sql("Select id,caption_e as caption, description
+                                     from categories "+ str )
+    end
+  end
+
+
+  def self.sub_cat(id)
+    case  I18n.locale.to_s
+
+      when "en"
+        e = Admin::Category.find_by_sql("Select id,caption_e as caption, description
+                                     from categories  where parent_id = '#{id}' ")
+
+      when "zh-TW"
+        e = Admin::Category.find_by_sql("Select id,caption as caption, description
+                                     from categories  where parent_id = '#{id}' ")
+
+      when "zh-CN"
+        e = Admin::Category.find_by_sql("Select id,caption_s as caption, description
+                                     from categories  where parent_id = '#{id}' ")
+
+      else
+        e = Admin::Category.find_by_sql("Select id,caption_e as caption, description
+                                     from categories  where parent_id = '#{id}' ")
+
+
+    end
+  end
+
 end

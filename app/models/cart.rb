@@ -2,7 +2,7 @@ class Cart
 
   #Initalize Cart Session
   def initialize(session)
-      @cart_data = session 
+      @cart_data = session
       @cart_data[:cart] ||= {}
   end
 
@@ -23,7 +23,7 @@ class Cart
 
   #Cart Count
   def cart_count
-    amount = 0 
+    amount = 0
     if !@cart_data[:cart].empty?
       @cart_data[:cart].each do |key, item| amount += item["buy_count"].to_i end
     end
@@ -53,6 +53,7 @@ class Cart
   def build_order
 
     @order = Order.new
+    @order.trsNo = FormNumber.get("OD")
     @order.qty_amount = cart_count
     @order.total_amount = subtotal
     @order.user_id = @cart_data[:user].id

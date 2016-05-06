@@ -27,9 +27,9 @@
       <a>規格</a>
     </div>
     <div class="description">
-    <%= f.sub_products.pluck("DISTINCT size").collect{|size| size}.to_sentence(:two_words_connector => ' , ')
+    <%= f.sizes.collect{|size| size}.to_sentence(:two_words_connector => ' , ')
     %>
-    <%= f.sub_products.pluck("DISTINCT color").collect{|color| color}.to_sentence(:two_words_connector => ' , ')
+    <%= f.colors.collect{|color| color}.to_sentence(:two_words_connector => ' , ')
     %>
     </div>
   </div>

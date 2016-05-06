@@ -1,5 +1,5 @@
 class Admin::ProductsController < Admin::BaseController
-  # 
+  #
   before_action :set_record, :only => [:show, :edit, :update, :destroy]
 
   def index
@@ -59,8 +59,12 @@ private
   end
 
   def product_params
-    params.require(:admin_product).permit(:id, :caption, :description, :unit_price, :sale_price, :cost, :itemcode, 
-      {sub_products_attributes: [:id, :size, :color, :qty, :itemcode, :seq, :_destroy]}, 
+    params.require(:admin_product).permit(:id,
+      :caption, :description, :unit_price, :sale_price,
+      :caption_s, :description_s, :unit_price_s, :sale_price_s,
+      :caption_e, :description_e, :unit_price_e, :sale_price_e,
+      :cost, :itemcode,
+      {sub_products_attributes: [:id, :size, :color, :qty, :itemcode, :seq, :_destroy]},
       {main_pictures_attributes: [:id, :image_cache, :image, :seq, :_destroy]},
       {profile_pictures_attributes: [:id, :image_cache, :image, :seq, :_destroy]},
       category_ids:[]

@@ -1,0 +1,29 @@
+en:
+  site:
+    nav:
+      catalog:
+        cat1: Cloth
+        cat2: Shoes
+        cat3: Bags
+        cat4: Accessories
+      notlogin:
+        login: Login
+        reg:  Register
+      islogin:
+        myaccount: MyAccount
+        chgpassword: Chang Password
+        logout: Logout
+        cart: Cart
+
+    side:
+      title: Purchase Detail
+      itemcode: ItemNo
+      spec: Spec
+      color: Color
+      size: Size
+      qty:  Quantity
+      confirmmsg: Remove？
+      checkout: Checkout
+
+    footer:
+      about: About MJP

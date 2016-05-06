@@ -1,18 +1,35 @@
 Rails.application.routes.draw do
 
   mount Ckeditor::Engine => '/ckeditor'
-  # backend 
+  # backend
   namespace :admin do
     resources :dashboard, :groups, :categories, :products, :menus
+    #resources :dashboard, :groups, :categories, :products, :menus
     #
     devise_for :users, class_name: "Admin::User", controllers: {
       confirmations: "admin/users/confirmations",
       # omniauth_callbacks: "admin/users/omniauth_callbacks",
       passwords: "admin/users/passwords",
       registrations: "admin/users/registrations",
-      sessions: "admin/users/sessions", 
-      unlocks: "admin/users/unlocks"       
+      sessions: "admin/users/sessions",
+      unlocks: "admin/users/unlocks"
     }
+    resources :orders do
+      member do
+        post :cancel_order
+        post :make_payment
+        post :ask_for_cancel
+        post :paid_return
+
+        post :ship
+        post :deliver
+
+        post :ask_for_return
+        post :wait_ten_days
+        post :return_goods
+        post :make_payback
+      end
+    end
     root 'dashboard#index'
   end
   # frontend
@@ -21,13 +38,14 @@ Rails.application.routes.draw do
     omniauth_callbacks: "users/omniauth_callbacks",
     passwords: "users/passwords",
     registrations: "users/registrations",
-    sessions: "users/sessions", 
-    unlocks: "users/unlocks"       
+    sessions: "users/sessions",
+    unlocks: "users/unlocks"
   }
-  
+
   # site
   resources :site do
     collection do
+
       get 'find'
       post 'spec'
       post 'cart_add'
@@ -35,6 +53,7 @@ Rails.application.routes.draw do
     end
 
     member do
+
       # post 'spec'
     end
   end
@@ -44,6 +63,9 @@ Rails.application.routes.draw do
   resources :shopping
 
   resources :myaccount
+
+  resources :orders
+
 
   root 'site#index'
   # The priority is based upon order of creation: first created -> highest priority.
