@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-
+  mount LetterOpenerWeb::Engine, at: "/letter_opener"
   mount Ckeditor::Engine => '/ckeditor'
   # backend
   namespace :admin do
