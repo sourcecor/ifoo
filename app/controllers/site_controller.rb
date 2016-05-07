@@ -1,7 +1,7 @@
 class SiteController < ApplicationController
 
   def index
-    flash[:notice] =   I18n.locale
+    #flash[:notice] =   I18n.locale
   end
 
   def find
