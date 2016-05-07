@@ -81,5 +81,13 @@ Rails.application.configure do
 
   #config.action_mailer.delivery_method = :letter_opener
   config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = config_for(:email).symbolize_keys
+  #config.action_mailer.smtp_settings = config_for(:email).symbolize_keys
+  config.action_mailer.smtp_settings = {
+    port:           587,
+    address:        "smtp.mailgun.org",
+    user_name:      "postmaster@sandbox311f0495e3454b82a0f3661a65c6b711.mailgun.org", # 你的 mailgun 的 user_name ( 見作業 1 解答 )
+    password:       "22401809", # 你的 mailgun 的 password ( 見作業 1 解答 )
+    domain:         "sandbox311f0495e3454b82a0f3661a65c6b711.mailgun.org",
+    authentication: :plain,
+  }
 end
