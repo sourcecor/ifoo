@@ -13,7 +13,7 @@ class Admin::Menu < ActiveRecord::Base
 	accepts_nested_attributes_for :sub_menus, allow_destroy: true, :reject_if => lambda { |a| a[:caption].blank? }
 	# remove from related table
 	after_destroy { |record|
-		ActiveRecord::Base.connection.execute("DELETE from groups_menus where menu_id = '#{record.id}'")
+		ActiveRecord::Base.connection.execute("DELETE from group_menus where menu_id = '#{record.id}'")
 	}
 	#
 	def position_string

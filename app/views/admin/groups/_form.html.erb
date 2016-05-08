@@ -19,11 +19,12 @@
   	<div class="field">
       <div class="ui horizontal divider">群組成員</div>
       <div class="ui grid">
-        <%= hidden_field_tag "admin_group[user_ids][]", nil %>
+        <%#= hidden_field_tag "admin_group[user_ids][]", nil %>
+        <%= hidden_field_tag "group[user_ids][]", nil %>
         <% for user in Admin::User.all.where(
-          "id not in(select user_id from admin_groups_users)
+          "id not in(select user_id from group_users)
             or
-          id in (select user_id from admin_groups_users where group_id='#{@group.id}')") %>
+          id in (select user_id from group_users where group_id='#{@group.id}')") %>
           <%= render 'user_fields', f: user %>
         <% end %>
       </div>
@@ -31,7 +32,7 @@
     <div class="field">
     <div class="ui horizontal divider">群組選單</div>
       <div class="ui grid">
-        <%= hidden_field_tag "admin_group[menu_ids][]", nil %>
+        <%= hidden_field_tag "group[menu_ids][]", nil %>
         <% for menu in Admin::Menu.where("(parent_id IS NULL or parent_id =0)") %>
           <%= render 'menu_fields', f: menu %>
         <% end %>
