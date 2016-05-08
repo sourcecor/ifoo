@@ -16,8 +16,9 @@ class AvatarUploader < CarrierWave::Uploader::Base
   def store_dir
     "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
   end
-  
-  process resize_to_fit: [800, 800] #圖片上傳後，自動切成你要的size
+
+  #process resize_to_fit: [800, 800] #圖片上傳後，自動切成你要的size
+  process resize_to_fit: [1024, 1024] #圖片上傳後，自動切成你要的size
 
   version :thumb do #設同時切其他size的版本-thumb
     process resize_to_fill: [70,70]

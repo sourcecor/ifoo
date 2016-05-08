@@ -8,7 +8,7 @@
         <!-- pictures -->
         <div class="fotorama" data-nav="thumbs" data-allowfullscreen="true">
           <% @product.main_pictures.each do |picture| %>
-            <%= content_tag(:a, href: picture.image.medium.url) do
+            <%= content_tag(:a, href: picture.image.url) do
                 concat(image_tag(picture.image.thumb.url))
               end
             %>
