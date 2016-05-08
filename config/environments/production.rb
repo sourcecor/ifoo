@@ -79,7 +79,6 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
   config.action_mailer.default_url_options = { :host => 'www.air-fitsense.com' }
 
-  #config.action_mailer.delivery_method = :letter_opener
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = config_for(:email).symbolize_keys
 
