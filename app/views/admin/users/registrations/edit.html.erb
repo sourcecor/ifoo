@@ -23,7 +23,8 @@
     </h2>
     <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }, class: "ui large form") do |f| %>
       <div class="ui stacked segment">
-        <%= f.input :email, wrapper: :input_icon_left, required: true, autofocus: true, placeholder: "E-mail address", readonly: true,  icon_html: { class: "user icon" } %>
+        <%= f.input :email, wrapper: :input_icon_left, required: true, autofocus: true, placeholder: "E-mail address", readonly: true,  icon_html: { class: "mail icon" } %>
+        <%= f.input :username, wrapper: :input_icon_left, required: true, autofocus: true, placeholder: "姓名"  ,  icon_html: { class: "user icon" } %>
         <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
           <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
         <% end %>
