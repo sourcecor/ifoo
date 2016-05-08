@@ -18,7 +18,7 @@ class AvatarUploader < CarrierWave::Uploader::Base
   end
 
   #process resize_to_fit: [800, 800] #圖片上傳後，自動切成你要的size
-  process resize_to_fit: [1024, 1024] #圖片上傳後，自動切成你要的size
+  process resize_to_fit: [1280, 1280] #圖片上傳後，自動切成你要的size
 
   version :thumb do #設同時切其他size的版本-thumb
     process resize_to_fill: [70,70]

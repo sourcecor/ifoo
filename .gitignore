@@ -15,4 +15,4 @@
 /config/database.yml
 /config/application.yml
 /config/mail.yml
-public/uploaders
+/public/uploaders
