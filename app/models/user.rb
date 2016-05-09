@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  devise :omniauthable, :omniauth_providers => [:google_oauth2]
   def self.create_from_omniauth(params)
     attributes = {
       email: params['info']['email'],
