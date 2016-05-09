@@ -81,5 +81,7 @@ Rails.application.configure do
 
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = config_for(:email).symbolize_keys
+  # config/initialisers/omniauth.rb
+  devise.config.full_host = Rails.env.production? ? 'https://www.mjpstyle.com' : 'http://localhost:3000'
 
 end
