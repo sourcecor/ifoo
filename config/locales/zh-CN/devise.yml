@@ -19,6 +19,14 @@ zh-CN:
       password_confirmation: 确认密码
       curpassword: 目前密码
 
+  sessions:
+    new:
+      title: 使用者登入
+      email: 帐户
+      email_placeholder: 您的email
+      password: 密码
+      reg: 注册
+
   devise:
     confirmations:
       confirmed: "恭喜您，注册成功，现在可以登录了"

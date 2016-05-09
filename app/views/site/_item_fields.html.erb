@@ -24,7 +24,8 @@
     </div>
     <div style="clear:both;"></div>
     <div class="meta" style="margin-top: 10px">
-      <a>規格</a>
+      <!-- 規格 -->
+      <a> <%= t("site.item_fields.spec",default:"Spec") %></a>
     </div>
     <div class="description">
     <%= f.sizes.collect{|size| size}.to_sentence(:two_words_connector => ' , ')
@@ -34,8 +35,9 @@
     </div>
   </div>
   <div class="extra content">
-    <%= link_to('選購', site_path(:id => f.id), class: "ui tiny green basic button right floated") %>
-    <span><i class="user icon"></i> 75 人購買 </span>
+    <!-- 選購 -->
+    <%= link_to(t('site.item_fields.select',default:'Select'), site_path(:id => f.id), class: "ui tiny green basic button right floated") %>
+    <!-- <span><i class="user icon"></i> 75 人購買 </span> -->
   </div>
 </div>
 

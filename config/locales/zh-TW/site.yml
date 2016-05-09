@@ -27,3 +27,12 @@ zh-TW:
 
     footer:
       about: 關於MJP
+
+    find:
+      find_nil: 查無此商品
+      find_sug: 請試試熱門關鍵字： MAJESTY、JILSANDER、MJP
+
+    item_fields:
+      spec: 規格
+      select: 選購
+

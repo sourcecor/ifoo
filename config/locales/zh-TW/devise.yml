@@ -19,6 +19,14 @@ zh-TW:
       password_confirmation: 確認密碼
       curpassword: 目前密碼
 
+  sessions:
+    new:
+      title: 使用者登入
+      email: 帳戶
+      email_placeholder: 您的email
+      password: 密碼
+      reg: 註冊
+
   devise:
     confirmations:
       confirmed: "您的帳號已通過驗證，現在您已成功登入。"

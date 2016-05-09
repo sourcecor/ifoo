@@ -27,3 +27,11 @@ en:
 
     footer:
       about: About MJP
+
+    find:
+      find_nil: Can not find this item
+      find_sug: Please try these hot keys： MAJESTY、JILSANDER、MJP
+
+    item_fields:
+      spec: Spec
+      select: Select

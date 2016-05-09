@@ -21,6 +21,14 @@ en:
       password_confirmation: Confirm Password
       curpassword: Current Password
 
+  sessions:
+    new:
+      title: User Login
+      email: Account(email)
+      email_placeholder: Your Email
+      password: Password
+      reg: Register
+
   devise:
     confirmations:
       confirmed: Your email address has been successfully confirmed.
