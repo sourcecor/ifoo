@@ -11,7 +11,6 @@ class Admin::Category < ActiveRecord::Base
 	has_many :products, through: :category_products
 	has_many :category_products, dependent: :destroy
 
-  attr_accessor :locale
 
   def self.iwhere(str)
 

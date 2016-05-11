@@ -8,6 +8,7 @@
       </div>
     </h2>
   </div>
+
   <% cart.cart_contents.each do |key, value| %>
   <div class="item" id=<%= key %>>
     <div class="ui grid">
@@ -32,16 +33,18 @@
       <div class="three wide middle aligned column">
         <%=
           link_to "<i class='trash icon'></i>".html_safe, cart_del_site_index_path(value),
-            method: :cart_del, data: { confirm: '確定要移除?' }, class: "ui icon red button"
+
+            method: :cart_del, data: { confirm: t("site.side.confirmmsg") }, class: "ui icon red button"
         %>
       </div>
     </div>
   </div>
+
   <% end %>
   <% if (cart.cart_count > 0) %>
   <div class="item">
     <%=
-      link_to "前往結帳", new_shopping_path, class: "fluid ui green button"
+      link_to t("site.side.checkout"), new_shopping_path, class: "fluid ui green button"
     %>
   </div>
   <% end %>

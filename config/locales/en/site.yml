@@ -35,3 +35,13 @@ en:
     item_fields:
       spec: Spec
       select: Select
+
+    currency: US$
+
+    show:
+      itemcode: Item Number
+      qty: Quantity
+      pick_to_cart: Add to Cart
+      sellout: Sold out
+      login_first: Please login
+      description: Commodity Description and Notes

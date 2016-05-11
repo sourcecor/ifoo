@@ -36,3 +36,13 @@ zh-TW:
       spec: 規格
       select: 選購
 
+    currency: NT$
+
+    show:
+      itemcode: 商品編號
+      qty: 數量
+      pick_to_cart: 放入購物車
+      sellout: 銷售一空
+      login_first: 請先登入
+      description: 商品說明及注意事項
+

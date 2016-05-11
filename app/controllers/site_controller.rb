@@ -2,41 +2,27 @@ class SiteController < ApplicationController
 
   def index
     #flash[:notice] =   I18n.locale
+    # if params[:locale] != ''
+    #   cart.clear
+    # end
   end
 
   def find
     keywords = params[:keywords]
     if !keywords.blank?
-      @products = Admin::Product.all
-      case I18n.locale.to_s
-        when "zh-TW"
-          @products = @products.where(["caption LIKE ?", "%#{keywords}%"])
-          if @products.empty?
-            categories = Admin::Category.where(["caption LIKE ?", "%#{keywords}%"])
-            @products = categories.first.products unless categories.first.nil?
-          end
+      # @products = Admin::Product.all
 
-        when "zh-CN"
-          @products = @products.where(["caption_s LIKE ?", "%#{keywords}%"])
-          if @products.empty?
-            categories = Admin::Category.where(["caption_s LIKE ?", "%#{keywords}%"])
-            @products = categories.first.products unless categories.first.nil?
-          end
+      # @products = @products.where(["caption LIKE ?", "%#{keywords}%"])
+      #   categories = Admin::Category.where(["caption LIKE ?", "%#{keywords}%"])
+      #   @products = categories.first.products unless categories.first.nil?
+      # end
 
-        when "en"
-          @products = @products.where(["caption_e LIKE ?", "%#{keywords}%"])
-          if @products.empty?
-            categories = Admin::Category.where(["caption_e LIKE ?", "%#{keywords}%"])
-            @products = categories.first.products unless categories.first.nil?
-          end
+      @products = Admin::Product.iwhere(" where caption LIKE '%#{keywords}%' ")
 
-        else
-          @products = @products.where(["caption_e LIKE ?", "%#{keywords}%"])
-          if @products.empty?
-            categories = Admin::Category.where(["caption_e LIKE ?", "%#{keywords}%"])
-            @products = categories.first.products unless categories.first.nil?
-          end
+      if @products.empty?
+        @products = Admin::Product.cwhere("  '%#{keywords}%' ")
       end
+
     else
       redirect_to :action => :index
     end
@@ -44,7 +30,10 @@ class SiteController < ApplicationController
 
   def show
     if !params[:id].blank?
-      @product = Admin::Product.find(params[:id])
+      #@product = Admin::Product.find(params[:id])
+      @product = Admin::Product.iwhere(" where id = '#{params[:id]}' ")
+      @pictures = Admin::ProductMainPicture.where(["product_id = ?", "#{params[:id]}"])
+      @profiles = Admin::ProductProfilePicture.where(["product_id = ?", "#{params[:id]}"])
     else
       redirect_to :action => :index
     end
@@ -52,9 +41,50 @@ class SiteController < ApplicationController
 
   def spec
     if request.xhr?
-      @product = Admin::Product.find(query_params[:id])
-        .sub_products.select('id, product_id, itemcode, qty, size, color')
-        .where(["size = ? and color = ? ", query_params[:size], query_params[:color] ]).first
+      #@product = Admin::Product.find(query_params[:id])
+          # .sub_products.select('id, product_id, itemcode, qty, size, color')
+          # .where(["size = ? and color = ? ", query_params[:size], query_params[:color] ]).first
+
+      case I18n.locale.to_s
+        when "en"
+          @product = Admin::Product.find(query_params[:id])
+            .sub_products.select('id, product_id, itemcode, qty, size_e as size, color_e as color')
+            .where(["size_e = ? and color_e = ? ", query_params[:size], query_params[:color] ]).first
+
+        when "zh-TW"
+          @product = Admin::Product.find(query_params[:id])
+            .sub_products.select('id, product_id, itemcode, qty, size, color')
+            .where(["size = ? and color = ? ", query_params[:size], query_params[:color] ]).first
+
+        when "zh-CN"
+          @product = Admin::Product.find(query_params[:id])
+            .sub_products.select('id, product_id, itemcode, qty, size_s as size, color_s as color')
+            .where(["size_s = ? and color_s = ? ", query_params[:size], query_params[:color] ]).first
+
+        else
+          @product = Admin::Product.find(query_params[:id])
+            .sub_products.select('id, product_id, itemcode, qty, size_e as size, color_e as color')
+            .where(["size_e = ? and color_e = ? ", query_params[:size], query_params[:color] ]).first
+
+      end
+      # case I18n.locale.to_s
+      #   when "en"
+      #     .sub_products.select('id, product_id, itemcode, qty, size_e as size, color_e as color')
+      #     .where(["size_e = ? and color_e = ? ", query_params[:size], query_params[:color] ]).first
+
+      #   when "zh-TW"
+      #     .sub_products.select('id, product_id, itemcode, qty, size, color')
+      #     .where(["size = ? and color = ? ", query_params[:size], query_params[:color] ]).first
+
+      #   when "zh-CN"
+      #     .sub_products.select('id, product_id, itemcode, qty, size_s as size, color_s as color')
+      #     .where(["size_s  = ? and color_s = ? ", query_params[:size], query_params[:color] ]).first
+
+      #   else
+      #     .sub_products.select('id, product_id, itemcode, qty, size, color')
+      #     .where(["size = ? and color = ? ", query_params[:size], query_params[:color] ]).first
+
+      # end
       render :json => @product
     end
   end

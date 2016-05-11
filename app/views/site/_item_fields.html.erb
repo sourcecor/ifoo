@@ -15,10 +15,12 @@
       <%=f.caption %>
       <div class="sub header" style="margin: 5px 0px">
         <div class="left floated">
-        <del>NT$<%=f.unit_price.round %></del>
+         <del><%=t("site.currency")+number_to_currency(f.unit_price,unit: "",precision: 0) %></del>
+
+
         </div>
         <div class="right floated">
-        NT$<%=f.sale_price.round %>
+        <%=t("site.currency")+number_to_currency(f.sale_price,unit: "",precision: 0) %>
         </div>
       </div>
     </div>

@@ -35,3 +35,14 @@ zh-CN:
     item_fields:
       spec: 規格
       select: 選購
+
+    currency: CN¥
+
+    show:
+      itemcode: 商品编号
+      qty: 数量
+      pick_to_cart: 放入购物车
+      sellout: 销售一空
+      login_first: 请先登入
+      description: 商品说明及注意事项
+
