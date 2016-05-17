@@ -32,7 +32,8 @@ class Cart
 
   #Cart Contents
   def cart_contents
-    products = @cart_data[:cart]
+    #products = @cart_data[:cart]
+    products=@cart_data[:cart].nil? ? {} : @cart_data[:cart]
   end
 
   #Qty & Price Count
@@ -76,10 +77,16 @@ class Cart
   end
 
   def clear
-    @cart_data[:cart] = nil
-    @cart_data[:user] = nil
-    @cart_data[:billing] = nil
-    @cart_data[:shipping] = nil
+    # @cart_data[:cart] = nil
+    # @cart_data[:user] = nil
+    # @cart_data[:billing] = nil
+    # @cart_data[:shipping] = nil
+
+    @cart_data[:cart] = {}
+    @cart_data[:user] = {}
+    @cart_data[:billing] = {}
+    @cart_data[:shipping] = {}
+
   end
 
   #Build JSON Requests

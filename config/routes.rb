@@ -29,6 +29,37 @@ Rails.application.routes.draw do
         post :make_payback
       end
     end
+    # 會員查詢
+    resources :user_finds do
+      member do
+        post :find_filter
+      end
+    end
+
+    #訂單查詢
+    resources :order_finds do
+
+    end
+
+    resources :sub_products do
+
+    end
+
+    resources :user_actives do
+
+    end
+
+    resources :order_actives do
+
+    end
+
+    resources :order_stats do
+    end
+
+    resources :order_closes do
+    end
+
+
     root 'dashboard#index'
   end
   # frontend

@@ -1,0 +1,19 @@
+<h2>會員查詢 </h2>
+
+<%= simple_form_for :filter ,url: admin_user_finds_path,html:{:id =>'filter_form'} do |f| %>
+  <div class="ui green segment">
+    <div class="ui four column grid container">
+      <div class="row">
+        <div class="column">
+          <%= date_field("filter", "start_date") %>
+        </div>
+        <div class="column">
+          <%= date_field("filter", "end_date") %>
+        </div>
+        <div class="column">
+          <%= button_tag "查詢" %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

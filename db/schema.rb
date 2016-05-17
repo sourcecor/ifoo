@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160508184450) do
+ActiveRecord::Schema.define(version: 20160516085824) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -160,6 +160,10 @@ ActiveRecord::Schema.define(version: 20160508184450) do
     t.datetime "updated_at",                                           null: false
     t.string   "aasm_state"
     t.string   "trsNo",            limit: 12
+    t.string   "order_type"
+    t.string   "pay_type"
+    t.string   "deliver_type"
+    t.string   "deliver_no"
   end
 
   create_table "pictures", force: :cascade do |t|
@@ -253,12 +257,12 @@ ActiveRecord::Schema.define(version: 20160508184450) do
   add_index "user_authentications", ["user_id"], name: "index_user_authentications_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
+    t.string   "email",                                          default: "", null: false
+    t.string   "encrypted_password",                             default: "", null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
+    t.integer  "sign_in_count",                                  default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
@@ -267,9 +271,20 @@ ActiveRecord::Schema.define(version: 20160508184450) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string   "unconfirmed_email"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
+    t.datetime "created_at",                                                  null: false
+    t.datetime "updated_at",                                                  null: false
     t.string   "username"
+    t.string   "line_id"
+    t.string   "wechat_id"
+    t.integer  "pcount"
+    t.integer  "valid_pcount"
+    t.string   "referral_code"
+    t.string   "referraled_code"
+    t.integer  "referral_count"
+    t.integer  "valid_referral_count"
+    t.integer  "user_dot"
+    t.decimal  "user_money",             precision: 8, scale: 2
+    t.string   "user_level"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

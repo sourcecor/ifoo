@@ -5,6 +5,24 @@ class SiteController < ApplicationController
     # if params[:locale] != ''
     #   cart.clear
     # end
+
+    # if !params[:locale].nil?
+    #   cart.clear
+    # end
+    if params[:locale].to_s !=''
+      cart.clear
+    end
+    # case  params[:locale]
+    #   when "en"
+    #   # if  cart.cart_count > 0
+    #   #   cart.clear
+    #   # end
+    #     cart.clear
+    #   when "zh-TW"
+    #     cart.clear
+    #   when "zh-CN"
+    #     cart.clear
+    # end
   end
 
   def find
